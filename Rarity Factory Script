@@ -1,0 +1,28 @@
+function teleportTO(placeCFrame)
+    local plyr = game.Players.LocalPlayer;
+    if plyr.Character then
+        plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+    end
+end
+
+function CollectOrb(num)
+    local args = {
+        [1] = num
+    }
+    game:GetService("ReplicatedStorage").Remotes.CollectOrb:FireServer(unpack(args))
+end
+
+local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
+
+local win = Flux:Window("PREVIEW", "Baseplate", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
+local tab = win:Tab("Tab 1", "http://www.roblox.com/asset/?id=6023426915")
+
+tab:Bind("Auto Obby", Enum.KeyCode.Q, function()
+    teleportTO(game:GetService("Workspace").Obby.RewardButtons.Money.Button.CFrame)
+end)
+
+tab:Bind("CollectOrb", Enum.KeyCode.E, function()
+    for i = 1, 10000 do
+        CollectOrb(i)
+    end
+end)
