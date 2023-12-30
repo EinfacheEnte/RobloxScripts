@@ -28,6 +28,6 @@ tab:Bind("CollectOrb (might not work)", Enum.KeyCode.E, function()
         CollectOrb(i)
     end
 end)
-tab:Bind("AirDrops", Enum.KeyCode.F, function()
+tab:Bind("AirDrops (is buggy have to fix it)", Enum.KeyCode.F, function()
     teleportTO(Airdrop)
 end)
