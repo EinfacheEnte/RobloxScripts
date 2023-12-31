@@ -1,0 +1,31 @@
+local child = game:GetService("Workspace").Environment.Locations.Supermarket.Shelves:GetChildren()
+local VirtualInputManager = cloneref(game:GetService("VirtualInputManager"))
+local SendKeyEvent = VirtualInputManager.SendKeyEvent
+    getgenv().keypress = function(p1, p2)
+        SendKeyEvent(VirtualInputManager, true, p1, p2 and p2 or false, nil)
+    end
+getgenv().on = true
+
+function teleportTO(placeCFrame)
+    local plyr = game.Players.LocalPlayer;
+    if plyr.Character then
+        plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+    end
+end
+
+function Shelves()
+    print("Teleporting...")
+    teleportTO(game:GetService("Workspace").Environment.Locations.Supermarket.Crates.Crate.CFrame)
+    wait(5)
+    for i = 1, #child do 
+        print(child[i])
+        if child[i].IsEmpty.Value == true then
+            teleportTO(child[i]["Content_Empty"].CFrame) -- buggy have to fix later for loop must break after first empty shelf
+            wait(5)
+            break
+        end
+    end   
+end
+while on == true do
+    Shelves()
+end
